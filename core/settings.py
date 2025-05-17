@@ -55,6 +55,8 @@ LOCAL_APPS = [
 
 EXTERNAL_APPS = [
     'rest_framework',
+    'drf_yasg',
+    'jazzmin',
 ]
 
 INSTALLED_APPS = EXTERNAL_APPS + DJANGO_APPS + LOCAL_APPS
@@ -101,6 +103,30 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
     }
+}
+
+# Rest_framework settings for JWT Authentication
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'JWT Authorization header. Example: Bearer <your_token>',
+        },
+    },
+    'USE_SESSION_AUTH': False,
+    # 'PERSIST_AUTH': True
 }
 
 

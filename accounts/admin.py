@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.utils.translation import gettext_lazy as _
 
 from accounts.models import User, Cart, CartItem
 
@@ -9,11 +11,28 @@ class CartItemInline(admin.TabularInline):
 
 
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(BaseUserAdmin):
     list_display = ("id", "email", "phone_number", "first_name", "last_name", "is_active", "is_staff")
     list_display_links = ("id", "email", "phone_number", "first_name", "last_name")
     search_fields = ("email", "phone_number", "first_name", "last_name")
     list_filter = ("is_active", "is_staff")
+
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        (_('Personal_info'), {'fields': ('first_name', 'last_name', 'phone_number', 'avatar', 'bio')}),
+        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+    )
+
+    add_fieldsets = (
+    (None, {
+        'classes': ('wide',),
+        'fields': ('email', 'password1', 'password2'),
+    })
+    )
+
+    ordering = ('email',)
+    filter_horizontal = ('groups', 'user_permissions',)
+
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
