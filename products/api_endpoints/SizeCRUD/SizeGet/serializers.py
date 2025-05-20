@@ -3,7 +3,7 @@ from rest_framework import serializers
 from products.models import Size
 
 
-class SizeCreateSerializer(serializers.ModelSerializer):
+class SizeGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Size
-        fields = '__all__'
+        fields = ('name', 'slug',)

@@ -4,12 +4,12 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, GenericAPIView
 
 from products.models import Color
-from .serializers import ColorCreateSerializer
+from .serializers import ColorGetSerializer
 
 
 class ColorListAPIView(ListAPIView):
     queryset = Color.objects.all()
-    serializer_class = ColorCreateSerializer
+    serializer_class = ColorGetSerializer
 
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(self.get_queryset(), many=True)

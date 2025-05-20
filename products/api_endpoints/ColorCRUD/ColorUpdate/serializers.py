@@ -6,4 +6,4 @@ from products.models import Color
 class ColorUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Color
-        fields = '__all__'
+        fields = ('name', 'slug',)

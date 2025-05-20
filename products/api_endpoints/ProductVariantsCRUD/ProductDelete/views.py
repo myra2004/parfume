@@ -8,6 +8,8 @@ from products.models import ProductVariant
 
 class ProductVariantDeleteAPIView(DestroyAPIView):
     queryset = ProductVariant.objects.all()
+    look_up_field = 'id'
 
     def delete(self, request, *args, **kwargs):
+        response = self.destroy(request, *args, **kwargs)
         return Response(status=status.HTTP_204_NO_CONTENT)

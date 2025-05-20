@@ -6,4 +6,4 @@ from common.models import MediaFile
 class MediaFileCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = MediaFile
-        fields = '__all__'
+        fields = ['file']

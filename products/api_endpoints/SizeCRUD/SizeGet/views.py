@@ -4,12 +4,12 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, GenericAPIView
 
 from products.models import Size
-from .serializers import SizeCreateSerializer
+from .serializers import SizeGetSerializer
 
 
 class SizeListAPIView(ListAPIView):
     queryset = Size.objects.all()
-    serializer_class = SizeCreateSerializer
+    serializer_class = SizeGetSerializer
 
     def get(self, request, *args, **kwargs):
         serializer = self.get_serializer(self.get_queryset(), many=True)

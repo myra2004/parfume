@@ -6,4 +6,4 @@ from products.models import Size
 class SizeUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Size
-        fields = '__all__'
+        fields = ('name', 'slug',)

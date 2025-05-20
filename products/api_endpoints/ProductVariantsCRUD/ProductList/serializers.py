@@ -9,10 +9,10 @@ class ProductVariantListSerializer(serializers.ModelSerializer):
         fields = (
             'name',
             'price',
-            'product.id',
-            'color.id',
-            'size.id',
-            'stock'
+            'product',
+            'color',
+            'size',
+            'stock',
         )
 
     def to_representation(self, instance):
@@ -23,5 +23,5 @@ class ProductVariantListSerializer(serializers.ModelSerializer):
             'product': instance.product.name if instance.product else 'Not Available',
             'color': instance.color.name if instance.color else 'Not Available',
             'size': instance.size.name if instance.size else 'Not Available',
-            'stock': instance.stock
+            'stock': instance.stock,
         }

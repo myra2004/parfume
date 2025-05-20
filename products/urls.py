@@ -24,7 +24,6 @@ urlpatterns = [
 
     path('mediafiles/list/', MediaFileGetAPIView.as_view(), name='category-list'),
     path('mediafiles/create/', MediaFileCreateAPIView.as_view(), name='category-create'),
-    # path('mediafiles/update/<int:pk>/', MediaFilesCRUD.MediaFilesUpdate.as_view(), name='category-update'),
     path('mediafiles/delete/<int:pk>/', MediaFileDeleteAPIView.as_view(), name='category-delete'),
 
     path('product-variants/list/', ProductVariantListAPIView.as_view(), name='category-list'),

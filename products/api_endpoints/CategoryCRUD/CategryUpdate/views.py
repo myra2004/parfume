@@ -12,5 +12,8 @@ class CategoryUpdateAPIView(UpdateAPIView):
     serializer_class = CategoryUpdateSerializer
 
     def put(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
