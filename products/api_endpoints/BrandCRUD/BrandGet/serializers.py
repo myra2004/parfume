@@ -18,7 +18,10 @@ class BrandGetSerializer(serializers.ModelSerializer):
             'id': instance.id,
             'name': instance.name,
             'slug': instance.slug,
-            'logo': str(instance.logo) if bool(instance.logo) is not False else ''
+            'logo': {
+                str(instance.logo.url),
+                str(instance.logo)
+            } if bool(instance.logo) is not False else ''
         }
 
         return instance
