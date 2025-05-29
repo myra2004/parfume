@@ -4,11 +4,12 @@ from accounts.api_endpoints import (
     CartItemListAPIView,
     CartItemCreateAPIView,
     CartItemUpdateAPIView,
-    CartItemDeleteAPIView
+    CartItemDeleteAPIView,
     # SessionLoginAPIView,
     # SessionLogoutAPIView,
+    ProfileUpdateAPIView,
+    ProfileDeleteAPIView,
 )
-
 
 urlpatterns = [
     # path('login/', SessionLoginAPIView.as_view(), name="login-session"),
@@ -17,4 +18,8 @@ urlpatterns = [
     path('cart/cart_items/create/', CartItemCreateAPIView.as_view(), name='cart-item-create'),
     path('cart/cart_items/delete/<int:pk>/', CartItemDeleteAPIView.as_view(), name='cart-item-delete'),
     path('cart/cart_items/update/<int:pk>/', CartItemUpdateAPIView.as_view(), name='cart-item-update'),
+
+    # Profile
+    path('profile/update/', ProfileUpdateAPIView.as_view(), name='profile-update'),
+    path('profile/delete/', ProfileDeleteAPIView.as_view(), name='profile-update'),
 ]
