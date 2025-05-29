@@ -22,10 +22,6 @@ urlpatterns = [
     path('color/update/<int:pk>/', ColorUpdateAPIView.as_view(), name='category-update'),
     path('color/delete/<int:pk>/', ColorDeleteAPIView.as_view(), name='category-delete'),
 
-    path('mediafiles/list/', MediaFileGetAPIView.as_view(), name='category-list'),
-    path('mediafiles/create/', MediaFileCreateAPIView.as_view(), name='category-create'),
-    path('mediafiles/delete/<int:pk>/', MediaFileDeleteAPIView.as_view(), name='category-delete'),
-
     path('product-variants/list/', ProductVariantListAPIView.as_view(), name='category-list'),
     path('product-variants/create/', ProductVariantCreateAPIView.as_view(), name='category-create'),
     path('product-variants/update/<int:pk>/', ProductVariantUpdateAPIView.as_view(), name='category-update'),

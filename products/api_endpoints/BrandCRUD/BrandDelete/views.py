@@ -8,7 +8,7 @@ from products.models import Brand
 
 class BrandDeleteAPIView(DestroyAPIView):
     queryset = Brand.objects.all()
-    look_up_field = 'id'
+    lookup_field = 'id'
 
     def delete(self, request, *args, **kwargs):
         response = self.destroy(request, *args, **kwargs)

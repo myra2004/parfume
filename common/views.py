@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.db import models
 
 from datetime import datetime, timedelta
 
@@ -10,7 +11,7 @@ class HomePageView(TemplateView):
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):
-        context = super(HomePageView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         categories = Category.objects.all()
         products = Product.objects.all()
@@ -29,7 +30,7 @@ class ContactPageView(TemplateView):
     template_name = 'contact.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ContactPageView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = 'VooCommerce | Contact Us'
 
         users = User.objects.filter(
@@ -43,7 +44,7 @@ class ShopDetailsView(TemplateView):
     template_name = 'shop-details.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ShopDetailsView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = 'VooCommerce | Shop Details'
 
         products = ProductVariant.objects.all()
@@ -56,13 +57,43 @@ class ShopCart(TemplateView):
     template_name = 'shoping-cart.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ShopCart, self).get_context_data(**kwargs)
+        cart_items = CartItem.objects.filter(cart=self.request.user).annotate(
+            total_amount = models.F('quantity') * models.F('product__price')
+        )
+        total_amount = sum(item.total_amount for item in cart_items)
+
+        context = super().get_context_data(**kwargs)
         context['title'] = 'VooCommerce | Shopping Cart'
-
-        carts = Cart.objects.all()
-        context['carts'] = carts
-
-        cart_items = CartItem.objects.all()
         context['cart_items'] = cart_items
+        context['total_amount'] = total_amount
 
         return context
+
+
+class ShopGridView(TemplateView):
+    template_name = 'shop-grid.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'VooCommerce | Shop Grid'
+        return context
+
+
+class BlogPageView(TemplateView):
+    template_name = 'blog.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'VooCommerce | Blog Detail'
+        return context
+
+
+class CheckoutPageView(TemplateView):
+    template_name = 'checkout.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'VooCommerce | Checkout'
+        return context
+
+
